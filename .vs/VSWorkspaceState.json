@@ -5,7 +5,10 @@
     "\\DatingApp-SPA\\e2e\\src",
     "\\DatingApp-SPA\\src",
     "\\DatingApp-SPA\\src\\app",
-    "\\DatingApp-SPA\\src\\app\\value"
+    "\\DatingApp-SPA\\src\\app\\value",
+    "\\DattingApp.API",
+    "\\DattingApp.API\\Models"
   ],
+  "SelectedNode": "\\DattingApp.API\\DatingApp.API.sln",
   "PreviewInSolutionExplorer": false
 }
