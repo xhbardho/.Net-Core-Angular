@@ -1,14 +1,15 @@
 {
   "ExpandedNodes": [
     "",
+    "\\DatingApp-SPA",
     "\\DatingApp-SPA\\e2e",
     "\\DatingApp-SPA\\e2e\\src",
     "\\DatingApp-SPA\\src",
     "\\DatingApp-SPA\\src\\app",
+    "\\DatingApp-SPA\\src\\app\\nav",
     "\\DatingApp-SPA\\src\\app\\value",
-    "\\DattingApp.API",
-    "\\DattingApp.API\\Models"
+    "\\DattingApp.API"
   ],
-  "SelectedNode": "\\DattingApp.API\\DatingApp.API.sln",
+  "SelectedNode": "\\DatingApp-SPA\\src\\app\\app.module.ts",
   "PreviewInSolutionExplorer": false
 }

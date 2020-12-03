@@ -21,6 +21,8 @@ namespace DatingApp.API.Controllers
         {
             _db = db;   
         }
+
+        [AllowAnonymous]
         // GET: api/<ValuesController>
         [HttpGet]
         public IActionResult Get()
