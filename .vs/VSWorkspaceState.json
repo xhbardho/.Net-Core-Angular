@@ -4,13 +4,13 @@
     "\\DatingApp-SPA",
     "\\DatingApp-SPA\\src",
     "\\DatingApp-SPA\\src\\app",
-    "\\DatingApp-SPA\\src\\app\\register",
+    "\\DatingApp-SPA\\src\\app\\nav",
     "\\DatingApp-SPA\\src\\app\\_guards",
     "\\DatingApp-SPA\\src\\environments",
     "\\DattingApp.API",
     "\\DattingApp.API\\Models",
     "\\DattingApp.API\\Properties"
   ],
-  "SelectedNode": "\\DatingApp-SPA\\src\\app\\_guards\\auth.guard.ts",
+  "SelectedNode": "\\DattingApp.API",
   "PreviewInSolutionExplorer": false
 }
