@@ -5,12 +5,12 @@
     "\\DatingApp-SPA\\src",
     "\\DatingApp-SPA\\src\\app",
     "\\DatingApp-SPA\\src\\app\\members",
-    "\\DatingApp-SPA\\src\\app\\members\\member-detail",
-    "\\DatingApp-SPA\\src\\app\\members\\member-list",
-    "\\DatingApp-SPA\\src\\app\\_models",
-    "\\DatingApp-SPA\\src\\app\\_resolvers",
-    "\\DatingApp-SPA\\src\\app\\_services"
+    "\\DatingApp-SPA\\src\\app\\members\\member-edit",
+    "\\DatingApp-SPA\\src\\app\\_services",
+    "\\DattingApp.API",
+    "\\DattingApp.API\\Dtos",
+    "\\DattingApp.API\\Helpers"
   ],
-  "SelectedNode": "\\DatingApp-SPA\\src\\app\\app.module.ts",
+  "SelectedNode": "\\DatingApp-SPA\\src\\app\\members\\member-edit\\member-edit.component.ts",
   "PreviewInSolutionExplorer": false
 }
