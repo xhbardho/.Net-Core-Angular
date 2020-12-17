@@ -15,7 +15,7 @@
   <div class="row">
     <div class="col-sm-4">
       <div class="card">
-        <img class="card-image-top img-thumbnail" src="{{user.photoUrl}}" alt="{{user.knownAs}}" />
+        <img class="card-image-top img-thumbnail" src="{{photoUrl}}" alt="{{user.knownAs}}" />
         <div class="card-body">
           <div>
             <strong>Location</strong>
@@ -59,22 +59,17 @@
                 <input type="text" name="city" rows="6" [(ngModel)]="user.city" class="form-control" />
                 <label for="country">Country</label>
                 <input type="text" name="country" rows="6" [(ngModel)]="user.country" class="form-control" />
-
-
               </div>
             </form>
-
           </tab>
 
           <tab heading="Edit Photos">
-            <p>Photo will go here</p>
+            <app-photo-editor [photos]="user.photos"
+                              (getMemberPhotoChange)="updateMainPhoto($event)">
+            </app-photo-editor>
           </tab>
-
-
-
         </tabset>
       </div>
-
     </div>
   </div>
 </div>

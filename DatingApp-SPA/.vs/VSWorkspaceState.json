@@ -5,10 +5,10 @@
     "\\e2e\\src",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\member-list",
-    "\\src\\assets",
-    "\\src\\environments"
+    "\\src\\app\\members",
+    "\\src\\app\\members\\member-edit",
+    "\\src\\app\\members\\photo-editor"
   ],
-  "SelectedNode": "\\src\\app\\member-list\\member-list.component.html",
+  "SelectedNode": "\\src\\app\\members\\photo-editor\\photo-editor.component.css",
   "PreviewInSolutionExplorer": false
 }
