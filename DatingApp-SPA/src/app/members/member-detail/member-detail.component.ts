@@ -14,6 +14,7 @@ import { log } from 'util';
 })
 export class MemberDetailComponent implements OnInit {
   user: User;
+  nowDate;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
@@ -25,6 +26,7 @@ export class MemberDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.user = data['user'];
+      this.nowDate = new Date(this.user.lastActive);
     });
   
     this.galleryOptions = [

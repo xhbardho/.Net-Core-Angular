@@ -15,6 +15,8 @@ import { error } from 'protractor';
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   user: User;
+  nowDate;
+
   photoUrl: string;
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -25,10 +27,12 @@ export class MemberEditComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService,
     private userService: UserService, private authService: AuthService) { }
+  ;
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.user = data['user'];
+      this.nowDate = (new Date(this.user.lastActive));
     });
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
