@@ -8,7 +8,8 @@ import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
-import { NgPipesModule } from 'ngx-pipes';
+import { MomentModule } from 'ngx-moment';
+
 
 import { AppComponent } from './app.component';
 import { from } from 'rxjs';
@@ -32,6 +33,9 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { ListsResolver } from './_resolvers/lists.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -61,6 +65,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MemberDetailComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    MemberMessagesComponent,
 
   ],
   imports: [
@@ -69,7 +74,11 @@ export class CustomHammerConfig extends HammerGestureConfig {
     NgxGalleryModule,
     FileUploadModule,
     FormsModule,
-    NgPipesModule,
+    MomentModule.forRoot({
+      relativeTimeThresholdOptions: {
+        'm': 59
+      }
+    }),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
@@ -96,7 +105,9 @@ export class CustomHammerConfig extends HammerGestureConfig {
     MemberDetailResolver,
     MemberListResolver,
     { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
-    MemberEditResolver
+    MemberEditResolver,
+    MessagesResolver,
+    ListsResolver
   ],
   bootstrap: [AppComponent]
 })

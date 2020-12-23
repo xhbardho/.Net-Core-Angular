@@ -1,34 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import { User } from '../../_models/user';
 import { UserService } from '../../_services/user.service';
 import { AlertifyService } from '../../_services/alertify.service';
 import { ActivatedRoute } from '@angular/router';
-import { error } from '@angular/compiler/src/util';
-import { NgxGalleryImage, NgxGalleryOptions, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
-import { log } from 'util';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
+import { TabsetComponent } from  '../../../../node_modules/ngx-bootstrap';
 
 @Component({
   selector: 'app-member-detail',
   templateUrl: './member-detail.component.html',
   styleUrls: ['./member-detail.component.css']
 })
-export class MemberDetailComponent implements OnInit {
+export class MemberDetailComponent implements OnInit, AfterViewInit  {
+  @ViewChild('memberTabs') memberTabs: TabsetComponent;
   user: User;
-  nowDate;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
 
-
-  constructor(private userService: UserService,
-    private alertify: AlertifyService,
+  constructor(private userService: UserService, private alertify: AlertifyService,
     private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
+  
+  ngOnInit() {
     this.route.data.subscribe(data => {
       this.user = data['user'];
-      this.nowDate = new Date(this.user.lastActive);
     });
-  
+
+
     this.galleryOptions = [
       {
         width: '500px',
@@ -37,42 +35,32 @@ export class MemberDetailComponent implements OnInit {
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide,
         preview: false
-      },
-      // max-width 800
-      {
-        breakpoint: 800,
-        width: '100%',
-        height: '600px',
-        imagePercent: 80,
-        thumbnailsPercent: 20,
-        thumbnailsMargin: 20,
-        thumbnailMargin: 20
-      },
-      // max-width 400
-      {
-        breakpoint: 400,
-        preview: false
       }
     ];
     this.galleryImages = this.getImages();
   }
 
-
-
-
-
-
+  ngAfterViewInit() {
+    this.route.queryParams.subscribe(params => {
+      const selectedTab = params['tab'];
+      this.memberTabs.tabs[selectedTab > 0 ? selectedTab : 0].active = true;
+    });
+  }
   getImages() {
     const imageUrls = [];
-    for (const photo of this.user.photos) {
+    for (let i = 0; i < this.user.photos.length; i++) {
       imageUrls.push({
-        small: photo.url,
-        medium: photo.url,
-        big: photo.url,
-        description: photo.description
-
+        small: this.user.photos[i].url,
+        medium: this.user.photos[i].url,
+        big: this.user.photos[i].url,
+        description: this.user.photos[i].description
       });
     }
     return imageUrls;
   }
+
+  selectTab(tabId: number) {
+    this.memberTabs.tabs[tabId].active = true;
+  }
+
 }

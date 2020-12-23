@@ -15,7 +15,6 @@ import { error } from 'protractor';
 export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   user: User;
-  nowDate;
 
   photoUrl: string;
   @HostListener('window:beforeunload', ['$event'])
@@ -32,7 +31,6 @@ export class MemberEditComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.user = data['user'];
-      this.nowDate = (new Date(this.user.lastActive));
     });
     this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }

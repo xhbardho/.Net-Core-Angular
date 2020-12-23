@@ -27,7 +27,7 @@
           </div>
           <div>
             <strong>Last Active:</strong>
-            <p>{{nowDate | timeAgo}}</p>
+            <p>{{user.lastActive | date: 'medium' | amTimeAgo}}</p>
           </div>
           <div>
             <strong>Member since:</strong>
