@@ -40,7 +40,7 @@
                  (unread)
                 </span>
                 <span *ngIf="message.isRead"  class="text-success">
-                  (Read {{message.dateRead}})
+                  (Read {{message.dateRead | date: 'medium' | amTimeAgo}})
                 </span>
               </small>
               <strong class="primary-font float-right">{{message.senderKnownAs}}</strong>

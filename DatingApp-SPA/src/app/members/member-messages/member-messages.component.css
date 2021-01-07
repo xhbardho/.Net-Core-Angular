@@ -19,6 +19,8 @@
     width: 50px;
 }
 .card-body {
-    overflow-y: scroll;
-    height: 400px;
+  overflow-y: scroll;
+  height: 400px;
+  display: flex;
+  flex-direction: column-reverse;
 }
