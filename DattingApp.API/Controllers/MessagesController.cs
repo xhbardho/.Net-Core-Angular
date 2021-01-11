@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -9,7 +8,6 @@ using DatingApp.API.Dtos;
 using DatingApp.API.Helpers;
 using DatingApp.API.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApp.API.Controllers
@@ -20,37 +18,44 @@ namespace DatingApp.API.Controllers
     [ApiController]
     public class MessagesController : ControllerBase
     {
-        private IDatingRepository _repo;
-        private IMapper _mapper;
-
+        private readonly IDatingRepository _repo;
+        private readonly IMapper _mapper;
         public MessagesController(IDatingRepository repo, IMapper mapper)
         {
             _mapper = mapper;
             _repo = repo;
         }
 
-        [HttpGet("/{id}", Name = "GetMessage")]
+        [HttpGet("{id}", Name = "GetMessage")]
         public async Task<IActionResult> GetMessage(int userId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
+
             var messageFromRepo = await _repo.GetMessage(id);
+
             if (messageFromRepo == null)
                 return NotFound();
+
             return Ok(messageFromRepo);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMessagesForUser(int userId, [FromQuery]MessageParams messageParams)
+        public async Task<IActionResult> GetMessagesForUser(int userId,
+            [FromQuery] MessageParams messageParams)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
+
             messageParams.UserId = userId;
 
             var messagesFromRepo = await _repo.GetMessagesForUser(messageParams);
+
             var messages = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
+
             Response.AddPagination(messagesFromRepo.CurrentPage, messagesFromRepo.PageSize,
                 messagesFromRepo.TotalCount, messagesFromRepo.TotalPages);
+
             return Ok(messages);
         }
 
@@ -64,7 +69,7 @@ namespace DatingApp.API.Controllers
 
             var messageThread = _mapper.Map<IEnumerable<MessageToReturnDto>>(messagesFromRepo);
 
-            return Ok(messageThread.Reverse());
+            return Ok(messageThread);
         }
 
         [HttpPost]
@@ -96,10 +101,11 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost("{id}")]
-        public async Task<IActionResult> DeleteMessage(int id,int userId)
+        public async Task<IActionResult> DeleteMessage(int id, int userId)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
+
             var messageFromRepo = await _repo.GetMessage(id);
 
             if (messageFromRepo.SenderId == userId)
@@ -110,6 +116,7 @@ namespace DatingApp.API.Controllers
 
             if (messageFromRepo.SenderDeleted && messageFromRepo.RecipientDeleted)
                 _repo.Delete(messageFromRepo);
+
             if (await _repo.SaveAll())
                 return NoContent();
 
@@ -117,11 +124,13 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost("{id}/read")]
-        public async Task<IActionResult> MarkMessageAsRead(int userId,int id)
+        public async Task<IActionResult> MarkMessageAsRead(int userId, int id)
         {
             if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
                 return Unauthorized();
+
             var message = await _repo.GetMessage(id);
+
             if (message.RecipientId != userId)
                 return Unauthorized();
 
@@ -129,6 +138,7 @@ namespace DatingApp.API.Controllers
             message.DateRead = DateTime.Now;
 
             await _repo.SaveAll();
+
             return NoContent();
         }
     }

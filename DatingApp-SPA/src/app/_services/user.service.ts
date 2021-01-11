@@ -98,7 +98,7 @@ export class UserService {
           if (response.headers.get('Pagination') !== null) {
             paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
           }
-
+          console.log(paginatedResult);
           return paginatedResult;
         })
       );

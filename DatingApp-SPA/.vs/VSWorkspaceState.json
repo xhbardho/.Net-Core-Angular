@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\members",
-    "\\src\\app\\members\\member-card",
     "\\src\\app\\members\\member-detail",
     "\\src\\app\\members\\member-edit",
     "\\src\\app\\members\\member-messages",
     "\\src\\app\\register",
-    "\\src\\app\\_services"
+    "\\src\\app\\_services",
+    "\\src\\environments"
   ],
-  "SelectedNode": "\\src\\app\\members\\member-messages\\member-messages.component.ts",
+  "SelectedNode": "\\src\\environments\\environment.ts",
   "PreviewInSolutionExplorer": false
 }
